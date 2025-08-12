@@ -1,0 +1,102 @@
+<!-- footer.html -->
+<style>
+  /* ===== Footer Styles ===== */
+  footer {
+    background: navy;
+    color: white;
+    padding: 2rem 1rem 1rem;
+    border-top: 4px solid goldenrod;
+    font-family: Arial, sans-serif;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+  }
+
+  .footer-logo {
+    height: 70px;
+    width: auto;
+    object-fit: contain;
+    margin-bottom: 0.8rem;
+  }
+
+  .footer-section h4 {
+    color: goldenrod;
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-section ul li {
+    margin-bottom: 0.4rem;
+  }
+
+  .footer-section a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .footer-section a:hover {
+    color: goldenrod;
+  }
+
+  .footer-contact p {
+    margin: 0.3rem 0;
+  }
+
+  /* Bottom bar */
+  .footer-bottom {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 0.8rem;
+  }
+</style>
+
+<footer>
+  <div class="footer-container">
+    <!-- Logo & Mission -->
+    <div class="footer-section">
+      <img src="images/PCEC Logo.png" alt="Phillips Community Enrichment Center Logo" class="footer-logo">
+      <p>Empowering our community through programs, fellowship, and service for all ages.</p>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-section">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="programs.html">Programs</a></li>
+        <li><a href="calendar.html">Calendar</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="volunteer.html">Volunteer</a></li>
+        <li><a href="egiving.html">E-Giving</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="footer-section footer-contact">
+      <h4>Contact Us</h4>
+      <p>📍 Phillips CME Church<br>2185 Winchester Rd NW<br>Huntsville, AL 35810</p>
+      <p>📞 <a href="tel:+12565342007" style="color:white;">(256) 534-2007</a></p>
+      <p>📧 <a href="mailto:phillipscommunityec@gmail.com" style="color:white;">phillipscommunityec@gmail.com</a></p>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="footer-bottom">
+    &copy; 2025 Phillips Community Enrichment Center. All rights reserved.
+  </div>
+</footer>

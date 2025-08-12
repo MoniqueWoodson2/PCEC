@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact Us – Phillips Community Enrichment Center</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="StyleSheet/style.css" />
+
+  <style>
+    /* ===== Contact Page Styles (named colors only) ===== */
+
+    /* Wrapper to align with site width helpers */
+    .section-wrap { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+
+    /* Contact Info card */
+    .contact-info {
+      background: floralwhite;
+      border: 1px solid gainsboro;
+      border-left: 4px solid goldenrod;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .contact-lead {
+      text-align: center;
+      color: gray;
+      margin: .25rem 0 1.25rem;
+    }
+
+    /* Info grid (one section, no articles) */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+      align-items: stretch;
+    }
+
+    .info-box {
+      background: white;
+      border: 1px solid gainsboro;
+      border-radius: 10px;
+      padding: 1rem;
+      height: 100%;
+    }
+    .info-box h3 {
+      color: navy;
+      font-size: 1.1rem;
+      margin: 0 0 .5rem;
+      text-align: center;
+    }
+    .info-box p {
+      margin: .35rem 0;
+      text-align: center;
+      color: black;
+    }
+    .info-box a {
+      display: inline-block;
+      max-width: 100%;
+      text-align: center;
+      color: navy;
+      text-decoration: none;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+    .info-box a:hover { text-decoration: underline; }
+
+    /* Hours list */
+    .hours {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .hours li {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      border-bottom: 1px dashed gainsboro;
+      padding: .25rem 0;
+      color: black;
+    }
+
+    /* Map (responsive embed) */
+    .map-card {
+      background: white;
+      border: 1px solid gainsboro;
+      border-radius: 10px;
+      padding: .75rem;
+    }
+    .map-wrap {
+      position: relative;
+      width: 100%;
+      padding-bottom: 30%;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .map-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Form card (reuses global look) */
+    .card {
+      background: floralwhite;
+      /*border: 1px solid gainsboro;*/
+      border: 1px solid navy;
+      border-radius: 12px;
+      padding: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto 2rem;
+    }
+    .hint { color: gray; text-align: center; }
+
+    /* Minimal grid + fields if not already present globally */
+    .grid { display: grid; gap: 1rem; }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    @media (max-width: 640px) { .grid-2 { grid-template-columns: 1fr; } }
+
+    .field label {
+      display: block;
+      font-weight: 700;
+      color: navy;
+      margin-bottom: .35rem;
+    }
+    .field input,
+    .field textarea {
+      width: 100%;
+      padding: .7rem .8rem;
+      border: 1px solid gainsboro;
+      border-radius: 8px;
+      background: white;
+      font: inherit;
+      line-height: 1.4;
+    }
+
+    .actions {
+      margin-top: 1rem;
+      display: flex;
+      gap: .75rem;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Buttons (inherit your site button feel) */
+    .btn {
+      display: inline-block;
+      font-weight: 800;
+      border-radius: 999px;
+      padding: .85rem 1.6rem;
+      border: 2px solid goldenrod;
+      background: goldenrod;
+      color: navy;
+      cursor: pointer;
+      transition: background .2s, color .2s, transform .08s, box-shadow .2s;
+    }
+    .btn:hover {
+      background: navy;
+      color: white;
+      border: 2px solid goldenrod;
+      box-shadow: 0 6px 16px goldenrod;
+      transform: translateY(-2px);
+    }
+
+    .status { min-height: 1.25rem; font-weight: 600; color: gray; }
+    .status.ok { color: green; }
+    .status.err { color: crimson; }
+
+    .hidden { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; overflow: hidden; }
+
+    /* Focus ring */
+    input:focus-visible, textarea:focus-visible, .btn:focus-visible {
+      outline: 3px solid goldenrod;
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Optional shared header -->
+  <div id="header-container"></div>
+
+  <main class="section-wrap">
+    <!-- Contact Info Section (one section, no articles) -->
+    <section class="contact-info" aria-labelledby="contact-info-title">
+      <h2 id="contact-info-title">Get in Touch</h2>
+      <p class="contact-lead">We’re here to help with program questions, partnerships, and general inquiries.</p>
+
+      <div class="contact-grid">
+        <div class="info-box">
+          <h3>Address</h3>
+          <p><strong>Phillips Community Enrichment Center</strong></p>
+          <p>2185 Winchester Rd NW</p>
+          <p>Huntsville, AL 35810</p>
+        </div>
+
+        <div class="info-box">
+          <h3>Phone & Email</h3>
+          <p><a href="tel:+12565342007">(256) 534-2007</a></p>
+          <p><a href="mailto:phillipscommunityec@gmail.com">phillipscommunityec@gmail.com</a></p>
+        </div>
+
+        <div class="info-box">
+          <h3>Hours</h3>
+          <ul class="hours" aria-label="Office Hours">
+            <li><span>Mon–Thu</span><span>9:00–5:00</span></li>
+            <li><span>Fri</span><span>9:00–3:00</span></li>
+            <li><span>Sat</span><span>By appointment</span></li>
+            <li><span>Sun</span><span>Closed</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="map-card">
+        <div class="map-wrap" aria-label="Map">
+          <iframe
+            title="Phillips CME Church Location"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Phillips%20CME%20Church%202185%20Winchester%20Rd%20NW%20Huntsville%20AL%2035810&output=embed">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Form (unchanged) -->
+    <section id="Contact" class="card">
+      <h2>Contact Us</h2>
+      <p class="hint">Have a question or concern? Send us a note and we’ll get back to you.</p>
+
+      <form id="contactForm" novalidate>
+        <input type="text" id="companyTrap" name="companyTrap" class="hidden" tabindex="-1" autocomplete="off" />
+
+        <div class="grid grid-2">
+          <div class="field">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" />
+          </div>
+          <div class="field">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" />
+          </div>
+
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555" />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" />
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="field">
+            <label for="company">Company Name (optional)</label>
+            <input type="text" id="company" name="company" />
+          </div>
+          <div class="field">
+            <label for="message">Message (optional)</label>
+            <textarea id="message" name="message" rows="4" placeholder="Share your question or concern..."></textarea>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="submit" id="submitBtn" class="btn btn-primary">Send Message</button>
+          <span id="formStatus" class="status" aria-live="polite"></span>
+        </div>
+        <p class="hint">Tip: Provide at least one contact method (phone or email) so we can reply.</p>
+      </form>
+    </section>
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script type="module" src="js/script.js"></script>
+  <script type="module" src="js/firebase.js"></script>
+  <script type="module" src="js/contact.js"></script>
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Volunteer – Phillips Community Enrichment Center</title>
+
+  <!-- Use the same global stylesheet -->
+  <link rel="stylesheet" href="StyleSheet/style.css">
+
+  <!-- Page-specific light additions (named colors only) -->
+  <style>
+    /* Hero matches site theme (no rgba) */
+    .page-hero {
+      background: linear-gradient(rgba(0,0,64,0.7), rgba(0,0,64,0.7)), url('images/volunteer/volunteer-hero.png') center/cover no-repeat;
+      background-blend-mode: multiply;
+      color: white;
+      text-align: center;
+      padding: 4rem 1rem 3rem;
+      border-top: 2px solid goldenrod;
+      border-bottom: 4px solid goldenrod;
+    }
+    .page-hero h1 { font-size: 2.25rem; }
+    .page-hero p  { max-width: 820px; margin: 0 auto; }
+
+    .section-wrap { max-width: 1100px; margin: 2.25rem auto; padding: 0 1rem; }
+
+    /* Ways to Serve (align with global card look) */
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+    .service-card{
+      background: floralwhite;
+      border: 1px solid gainsboro;
+      border-left: 4px solid goldenrod;
+      border-radius: 12px;
+      padding: 1.1rem;
+      text-align: center;
+      transition: transform .18s;
+    }
+    .service-card:hover { transform: translateY(-3px); }
+    .service-card img { width: 100%; height: 150px; object-fit: cover; border-radius: 10px; margin-bottom: .7rem; }
+    .service-card h3 { color: navy; margin: .25rem 0 .4rem; }
+
+    /* ===== Volunteer form styles (navy + goldenrod, named colors only) ===== */
+
+/* Card wrapper */
+.card {
+  background: floralwhite;
+  /*border: 1px solid gainsboro;*/
+  border: 1px solid navy;
+  border-radius: 12px;
+  padding: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.card .hint {
+  text-align: center;
+  color: gray;
+  margin: .25rem 0 1rem;
+}
+
+/* Grid system for form rows */
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+.grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Fields */
+.field .req {
+  margin-top: 1rem;
+  font-weight: 700;
+  color: navy;
+}
+.field label {
+  display: block;
+  font-weight: 700;
+  color: black;
+  margin-bottom: .35rem;
+}
+.field .req::after {
+  content: " *";
+  color: crimson;
+  font-weight: 700;
+}
+.field input[type="text"],
+.field input[type="email"],
+.field input[type="tel"],
+.field input[type="number"],
+.field select,
+.field textarea {
+  width: 100%;
+  padding: .7rem .8rem;
+  border: 1px solid gainsboro;
+  border-radius: 8px;
+  background: white;
+  font: inherit;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+.field textarea { resize: vertical; }
+
+/* Chips (checkbox pills) */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-top: .25rem;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .5rem .8rem;
+  /*border: 1px solid goldenrod;
+  border-radius: 999px;
+  background: white;*/
+  color: navy;
+  cursor: pointer;
+  user-select: none;
+  transition: transform .08s ease-in, box-shadow .15s ease-in;
+}
+.chip input[type="checkbox"] {
+  accent-color: goldenrod; /* modern browsers */
+}
+.chip:hover {
+  transform: translateY(-1px);
+}
+
+/* Actions row */
+.actions {
+  display: flex;
+  gap: .75rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+/* Buttons (re-use your theme) */
+.btn {
+  display: inline-block;
+  font-weight: 800;
+  border-radius: 999px;
+  padding: .85rem 1.6rem;
+  border: 2px solid goldenrod;
+  background: goldenrod;
+  color: navy;
+  cursor: pointer;
+  transition: background .2s, color .2s, transform .08s, box-shadow .2s;
+}
+.btn:hover {
+  background: navy;
+  color: white;
+  box-shadow: 0 6px 16px goldenrod;
+  transform: translateY(-2px);
+}
+.btn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+/* Status messages */
+.status {
+  min-height: 1.25rem;
+  font-weight: 600;
+  color: gray;
+}
+.status.ok { color: green; }
+.status.err { color: crimson; }
+
+/* Helpers */
+.hidden { 
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px; height: 1px; 
+  overflow: hidden;
+}
+
+/* Focus ring (accessibility) */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+.btn:focus-visible,
+.chip:focus-within {
+  outline: 3px solid goldenrod;
+  outline-offset: 2px;
+}
+
+/* Improve form spacing inside the card */
+#volunteerForm {
+  margin-top: .5rem;
+}
+
+    @media (max-width: 640px){ .form-row{ flex-direction: column; } }
+  </style>
+</head>
+<body>
+  <!-- Header include -->
+  <div id="header-container"></div>
+
+  <!-- Hero -->
+  <header class="page-hero">
+    <h1>Volunteer with PCEC</h1>
+    <p>Serve where you’re gifted: events, tutoring, logistics, communication, and more. Your time and heart change lives.</p>
+  </header>
+
+  <main class="section-wrap">
+    <!-- General ways to serve -->
+    <section aria-labelledby="ways-title" style="margin-bottom:2rem;">
+      <h2 id="ways-title">Ways to Serve</h2>
+      <div class="service-grid">
+        <article class="service-card">
+          <img src="images/volunteer/serve-events.png" alt="Volunteers helping at a community event">
+          <h3>Events & Outreach</h3>
+          <p>Help with event setup, greeting, registration, food service, and welcoming families at community gatherings.</p>
+        </article>
+        <article class="service-card">
+          <img src="images/volunteer/serve-tutoring.png" alt="Tutor helping a student">
+          <h3>Tutoring & Coaching</h3>
+          <p>Support after-school learning, homework help, reading buddies, and college/career readiness coaching.</p>
+        </article>
+        <article class="service-card">
+          <img src="images/volunteer/serve-logistics.png" alt="Volunteer sorting supplies">
+          <h3>Logistics & Care</h3>
+          <p>Sort donations, assemble care kits, transport items, or assist seniors with errands and appointments.</p>
+        </article>
+        <article class="service-card">
+          <img src="images/volunteer/serve-communications.png" alt="Volunteer working on communications">
+          <h3>Communications</h3>
+          <p>Photography, social media, writing, and design to share stories, events, and opportunities with our community.</p>
+        </article>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Volunteer Sign Up Form -->
+      <section id="Volunteer" class="card">
+        <h2>Volunteer With PCEC</h2>
+        <p class="hint">Tell us a little about yourself and how you’d like to help.</p>
+  
+        <form id="volunteerForm" novalidate>
+          <!-- Honeypot -->
+          <input type="text" id="company" name="company" class="hidden" tabindex="-1" autocomplete="off" />
+  
+          <div class="grid grid-2">
+            <div class="field">
+              <label for="firstName" class="req">First Name</label>
+              <input type="text" id="firstName" name="firstName" required />
+            </div>
+            <div class="field">
+              <label for="lastName" class="req">Last Name</label>
+              <input type="text" id="lastName" name="lastName" required />
+            </div>
+            <div class="field">
+              <label for="email" class="req">Email</label>
+              <input type="email" id="email" name="email" required placeholder="you@example.com" />
+            </div>
+            <div class="field">
+              <label for="phone" class="req">Phone Number</label>
+              <input type="tel" id="phone" name="phone" required placeholder="(555) 555-5555" />
+            </div>
+          </div>
+  
+          <!-- Interest Areas (at least one) -->
+          <div class="field">
+            <span class="req">Interest Areas (choose at least one)</span>
+            <div class="chips">
+              <label class="chip"><input type="checkbox" name="interests" value="Events & Outreach"> Events & Outreach</label>
+              <label class="chip"><input type="checkbox" name="interests" value="Tutoring & Coaching"> Tutoring & Coaching</label>
+              <label class="chip"><input type="checkbox" name="interests" value="Logistics & Care"> Logistics & Care</label>
+              <label class="chip"><input type="checkbox" name="interests" value="Communications"> Communications</label>
+            </div>
+            <small class="hint">You can pick more than one.</small>
+          </div>
+  
+          <div class="grid grid-2">
+            <div class="field">
+              <label for="availability" class="req">Availability (when can you volunteer?)</label>
+              <textarea id="availability" name="availability" rows="3" required placeholder="e.g., Weekdays after 5pm; Saturdays 9–1pm"></textarea>
+            </div>
+  
+            <div class="field">
+              <label for="frequency" class="req">Preferred Frequency</label>
+              <select id="frequency" name="frequency" required>
+                <option value="" selected disabled>Select one</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Bi-weekly">Bi-weekly</option>
+                <option value="Monthly">Monthly</option>
+                <option value="One-time">One-time</option>
+                <option value="Flexible">Flexible</option>
+              </select>
+            </div>
+          </div>
+  
+          <div class="field">
+            <label for="notes">Skills & Notes (optional)</label>
+            <textarea id="notes" name="notes" rows="4" placeholder="Relevant experience, certifications, or preferences"></textarea>
+          </div>
+  
+          <div class="field">
+            <label class="chip">
+              <input type="checkbox" id="consent" name="consent" required />
+              <span>I agree to be contacted about volunteer opportunities.</span>
+            </label>
+          </div>
+  
+          <div class="actions">
+            <button type="submit" id="submitBtn" class="btn btn-primary">Submit</button>
+            <span id="formStatus" class="status" aria-live="polite"></span>
+          </div>
+        </form>
+      </section>
+
+      <p class="policy" style="margin-top:1rem;">
+        Want to see our programs first? Visit the <a href="programs.html">Programs page</a>.
+      </p>
+    </section>
+  </main>
+
+  <!-- Footer include -->
+  <div id="footer-container"></div>
+
+  <!-- JavaScript Modules -->
+  <script type="module" src="js/script.js"></script>
+  <script type="module" src="js/firebase.js"></script>
+  <script type="module" src="js/volunteer.js"></script>
+
+</body>
+</html>
