@@ -66,7 +66,7 @@ h1 {
     width: 80px;
     height: 3px;
     background: goldenrod;
-    margin: 0.5rem auto 0; /* center the line under text */
+    margin: 0.5rem auto 0; 
     border-radius: 2px;
     margin-bottom: 1rem;
   }
@@ -76,7 +76,7 @@ h1 {
     width: 80px;
     height: 3px;
     background: goldenrod;
-    margin: 0.5rem auto 0; /* center the line under text */
+    margin: 0.5rem auto 0;
     border-radius: 2px;
   }
 
@@ -88,7 +88,6 @@ h1 {
    Hero
    ========================= */
 .hero {
-  /* Darken image with blend (no rgba) */
   /*background: navy;*/ 
   background: linear-gradient(rgba(0,0,64,0.7), rgba(0,0,64,0.7)),
   url('../images/community.png') center/cover no-repeat;
@@ -291,9 +290,103 @@ button:focus-visible,
   outline-offset: 2px;
 }
 
-/* =========================
-   Responsive
-   ========================= */
+/* ===============================
+   MEDIA QUERIES
+=============================== */
+/* Responsive for Tablets and Phones (480px to 1024px) */
+
+/* ===== Desktop-first defaults above ===== */
+
+/* ========== Large Tablets / Small Laptops (≤1200px) ========== */
+@media (max-width: 1200px) {
+    .section-wide { max-width: 1000px; }
+    .hero { padding: 4.5rem 1rem 3.5rem; }
+    .hero h1 { font-size: 2.2rem; }
+  }
+  
+  /* ========== Tablets Landscape (≤1024px) ========== */
+  @media (max-width: 1024px) {
+    .section-wide { max-width: 920px; }
+    .services-grid { grid-template-columns: repeat(2, minmax(260px, 1fr)); }
+    .about-highlights { grid-template-columns: repeat(2, minmax(240px, 1fr)); }
+    .founder-grid { grid-template-columns: 280px 1fr; gap: 1.5rem; }
+    .hero { padding: 4rem 1rem 3.25rem; }
+    .hero h1 { font-size: 2.1rem; }
+    .hero p { font-size: 1.05rem; }
+  }
+  
+  /* ========== Tablets Portrait (≤900px) ========== */
+  @media (max-width: 900px) {
+    .section-wide { max-width: 840px; }
+    .hero { padding: 3.75rem 1rem 3rem; }
+    .hero h1 { font-size: 2rem; }
+    .services-grid { grid-template-columns: repeat(2, minmax(240px, 1fr)); }
+    .impact-container { max-width: 920px; }
+    h1 { font-size: 1.9rem; }
+    h2 { font-size: 1.6rem; }
+  }
+  
+  /* ========== Large Phones / Small Tablets (≤768px) ========== */
+  @media (max-width: 768px) {
+    .section-narrow, .section-wide, .about-container { padding: 0 0.75rem; }
+    .hero { padding: 3.25rem 1rem 2.75rem; }
+    .hero h1 { font-size: 1.85rem; }
+    .hero p { font-size: 1rem; }
+  
+    /* Grids collapse to single column where it makes sense */
+    .services-grid { grid-template-columns: 1fr; }
+    .about-highlights { grid-template-columns: 1fr; }
+    .founder-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .founder-bio p { text-align: left; } /* keep bios easy to read on mobile */
+  
+    /* Forms (shared pattern used across pages) */
+    .grid-2 { grid-template-columns: 1fr; }
+    .btn, .btn-outline { padding: 0.65rem 1.25rem; }
+  
+    /* Spacing tweaks */
+    .what-we-do { padding: 2.25rem 0; }
+    .about-section { padding: 2.25rem 0; }
+  }
+  
+  /* ========== Phones (≤640px) ========== */
+  @media (max-width: 640px) {
+    .hero { padding: 3rem 0.75rem 2.25rem; }
+    .hero h1 { font-size: 1.75rem; }
+    .hero p { font-size: 0.95rem; }
+  
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.05rem; }
+  
+    .service-card { padding: 1rem; }
+    .highlight-card { padding: 1rem; }
+    .founder-photo img { max-width: 520px; margin: 0 auto; display: block; }
+  
+    /* Tighten list spacing for impact bullets on small screens */
+    .impact-container li { margin: 0.35rem 0; }
+  }
+  
+  /* ========== Small Phones (≤480px) ========== */
+  @media (max-width: 480px) {
+    .section-wide, .section-narrow { padding: 0 0.65rem; }
+    .hero { padding: 2.5rem 0.65rem 2rem; }
+    .hero h1 { font-size: 1.6rem; }
+    .hero p { font-size: 0.95rem; }
+  
+    .btn, .btn-outline {
+      padding: 0.6rem 1.1rem;
+      font-size: 0.95rem;
+    }
+  
+    /* Make cards breathe but stay compact */
+    .service-card, .highlight-card { border-radius: 10px; }
+    .founder-bio h3 { font-size: 1.3rem; }
+  
+    /* Forms: make inputs comfy and full-width */
+    .field input, .field textarea { padding: 0.65rem 0.75rem; }
+  }
+
+/*
 @media (max-width: 900px) {
   .hero { padding: 4.25rem 1rem 3.5rem; }
   .hero h1 { font-size: 2.1rem; }
@@ -304,4 +397,4 @@ button:focus-visible,
   .hero h1 { font-size: 1.9rem; }
   .hero p { font-size: 1rem; }
   .services-grid { grid-template-columns: 1fr; }
-}
+}*/
