@@ -14,7 +14,7 @@ const BTN_NEXT  = LB.querySelector('.lb-next');
 let photos = [];
 let idx = 0;
 
-const FOLDER = 'Images/photoAlbum/';
+const FOLDER = '/Images/photoAlbum/';
 const EXTS = ['.jpg','.jpeg','.png','.gif','.webp','.svg','.bmp','.jfif','.pjpeg','.pjp', '.avif'];
 
 // Normalize a URL/href to a plain filename within the folder
