@@ -1,6 +1,6 @@
-// js/gallery.js
+// js/gallery.js — GH Pages safe gallery using manifest.json (or inline list fallback)
 
-// ----- selectors / lightbox bits -----
+// ----- selectors / lightbox -----
 const GRID = document.getElementById('galleryGrid');
 const LB   = document.getElementById('lightbox');
 const LB_IMG = document.getElementById('lightboxImg');
@@ -12,103 +12,68 @@ const BTN_NEXT  = LB.querySelector('.lb-next');
 let photos = [];
 let idx = 0;
 
-// IMPORTANT: use a RELATIVE path, no leading slash.
-// This works whether your site is at root or at /some/subpath/
-const FOLDER_PATH = 'Images/photoAlbum/';
-// Resolve to an absolute URL based on the current page
-const FOLDER = new URL(FOLDER_PATH, document.baseURI).href;
+// ----- resolve paths against PAGE directory (not document.baseURI) -----
+const PAGE_DIR = window.location.href
+  .replace(/[?#].*$/, '')   // strip query/hash
+  .replace(/[^/]*$/, '');   // strip filename, keep trailing /
+
+const FOLDER_URL   = new URL('Images/photoAlbum/', PAGE_DIR).href;
+const MANIFEST_URL = new URL('manifest.json', FOLDER_URL).href;
+
+console.log('[Gallery] FOLDER_URL =', FOLDER_URL);
+console.log('[Gallery] MANIFEST_URL =', MANIFEST_URL);
 
 const EXTS = ['.jpg','.jpeg','.png','.gif','.webp','.svg','.bmp','.jfif','.pjpeg','.pjp','.avif'];
 
-function toName(href) {
-  try {
-    const u = new URL(href, window.location.href);
-    const p = u.pathname.replace(/\\/g,'/');
-    const i = p.lastIndexOf('/');
-    return decodeURIComponent(i >= 0 ? p.slice(i+1) : p);
-  } catch {
-    const parts = href.split('?')[0].split('#')[0].split('/');
-    return decodeURIComponent(parts[parts.length - 1] || href);
-  }
-}
 function looksLikeImage(name) {
-  const lower = name.toLowerCase();
+  const lower = String(name).toLowerCase();
   return EXTS.some(ext => lower.endsWith(ext));
 }
 
-// Try reading a directory index page (many hosts disable this; OK if it fails)
-async function listFromDirectoryIndex() {
-  try {
-    const res = await fetch(FOLDER, { cache: 'no-store' });
-    if (!res.ok) throw new Error('dir index not available');
-    const html = await res.text();
-    const div = document.createElement('div');
-    div.innerHTML = html;
-    const links = Array.from(div.querySelectorAll('a'));
-    let names = links
-      .map(a => a.getAttribute('href') || '')
-      .filter(href => href && href !== '../')
-      .map(href => toName(href))
-      .filter(name => name && looksLikeImage(name));
-    names = Array.from(new Set(names)).sort((a,b) => a.localeCompare(b, undefined, { numeric:true, sensitivity:'base' }));
-    return names;
-  } catch {
-    return [];
-  }
-}
-
-// Manifest fallback (RECOMMENDED): Images/photoAlbum/manifest.json
+// ----- sources -----
 async function listFromManifest() {
   try {
-    const manifestURL = new URL('manifest.json', FOLDER).href;
-    const res = await fetch(manifestURL, { cache: 'no-store' });
-    if (res.ok) {
-      const arr = await res.json();
-      if (Array.isArray(arr)) {
-        return arr
-          .map(String)
-          .filter(name => looksLikeImage(name))
-          .sort((a,b) => a.localeCompare(b, undefined, { numeric:true, sensitivity:'base' }));
-      }
+    const res = await fetch(MANIFEST_URL, { cache: 'no-store' });
+    console.log('[Gallery] manifest status:', res.status);
+    if (!res.ok) throw new Error('manifest fetch failed');
+    const arr = await res.json();
+    if (Array.isArray(arr)) {
+      return arr.map(s => String(s).trim()).filter(looksLikeImage);
     }
-  } catch {}
-  return [];
-}
-
-// Window global fallback
-function listFromWindowGlobal() {
-  if (Array.isArray(window.PHOTO_SOURCES)) {
-    return window.PHOTO_SOURCES
-      .map(String)
-      .filter(name => looksLikeImage(name))
-      .sort((a,b) => a.localeCompare(b, undefined, { numeric:true, sensitivity:'base' }));
+  } catch (e) {
+    console.warn('[Gallery] Manifest not found/invalid:', e);
   }
   return [];
 }
 
-// Render grid
+// Optional fallback: define window.PHOTO_SOURCES = ['file1.jpg', ...] in HTML
+function listFromWindowGlobal() {
+  if (Array.isArray(window.PHOTO_SOURCES)) {
+    return window.PHOTO_SOURCES.map(String).filter(looksLikeImage);
+  }
+  return [];
+}
+
+// ----- render -----
 function renderGrid(items) {
   GRID.innerHTML = '';
 
   if (!items.length) {
     const msg = document.createElement('p');
-    msg.textContent = 'No photos found. Add a manifest.json or define window.PHOTO_SOURCES.';
+    msg.textContent = 'No photos found. Add Images/photoAlbum/manifest.json or define window.PHOTO_SOURCES.';
     msg.style.textAlign = 'center';
     GRID.appendChild(msg);
     return;
   }
 
   items.forEach((name, i) => {
-    const src = new URL(name, FOLDER).href;
+    const src = new URL(encodeURIComponent(name), FOLDER_URL).href;
+
     const a = document.createElement('a');
     a.href = src;
     a.className = 'thumb';
     a.setAttribute('data-index', String(i));
-    a.setAttribute('aria-label', `Open image ${i+1}`);
-    a.addEventListener('click', (e) => {
-      e.preventDefault();
-      openLightbox(i);
-    });
+    a.addEventListener('click', (e) => { e.preventDefault(); openLightbox(i); });
 
     const img = document.createElement('img');
     img.loading = 'lazy';
@@ -120,33 +85,21 @@ function renderGrid(items) {
   });
 }
 
-// Lightbox
 function openLightbox(i) {
   idx = i;
-  const src = new URL(photos[idx], FOLDER).href;
+  const src = new URL(encodeURIComponent(photos[idx]), FOLDER_URL).href;
   LB_IMG.src = src;
   LB_IMG.alt = photos[idx] || 'Photo';
   LB_CAP.textContent = photos[idx] || '';
   LB.classList.add('open');
-  LB.setAttribute('tabindex', '-1'); // ensure focusable
+  LB.setAttribute('tabindex', '-1');
   LB.focus();
 }
-function closeLightbox() {
-  LB.classList.remove('open');
-  LB_IMG.src = '';
-}
-function prevImg() {
-  if (!photos.length) return;
-  idx = (idx - 1 + photos.length) % photos.length;
-  openLightbox(idx);
-}
-function nextImg() {
-  if (!photos.length) return;
-  idx = (idx + 1) % photos.length;
-  openLightbox(idx);
-}
+function closeLightbox() { LB.classList.remove('open'); LB_IMG.src = ''; }
+function prevImg() { if (!photos.length) return; idx = (idx - 1 + photos.length) % photos.length; openLightbox(idx); }
+function nextImg() { if (!photos.length) return; idx = (idx + 1) % photos.length; openLightbox(idx); }
 
-// Events
+// ----- events -----
 BTN_CLOSE.addEventListener('click', closeLightbox);
 BTN_PREV.addEventListener('click', prevImg);
 BTN_NEXT.addEventListener('click', nextImg);
@@ -158,16 +111,10 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowRight') nextImg();
 });
 
-// Init
+// ----- init -----
 (async function init() {
-  // 1) Try directory listing (often blocked in production)
-  photos = await listFromDirectoryIndex();
-
-  // 2) Fallback to manifest.json (recommended & reliable)
-  if (!photos.length) photos = await listFromManifest();
-
-  // 3) Fallback to window.PHOTO_SOURCES
+  // On GH Pages, directory listing won’t work, so rely on manifest or inline list
+  photos = await listFromManifest();
   if (!photos.length) photos = listFromWindowGlobal();
-
   renderGrid(photos);
 })();
