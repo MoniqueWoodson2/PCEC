@@ -1,98 +1,104 @@
 <!-- header.html -->
 <style>
-    /* ===== Header (Navy + Goldenrod) ===== */
-    .top-header {
-      width: 100%;
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      gap: 1rem;
-      background: navy;
-      padding: 1rem 1.25rem;
-      border-bottom: 4px solid goldenrod;
-    }
-    .header-logo {
-      height: 80px;
-      width: auto;
-      object-fit: contain;
-    }
-    .top-header .left-wrap { justify-self: start; }
-    .top-header .right-wrap { justify-self: end; }
-  
-    .church-name {
-      color: white;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-      text-align: center;
-      font-size: 2rem;
-      line-height: 1.1;
-    }
-  
-    /* ===== Primary Nav ===== */
-    .main-nav {
-      background: floralwhite;
-      border-bottom: 2px solid goldenrod;
-    }
-    .main-nav ul {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.25rem;
-      list-style: none;
-      margin: 0;
-      padding: 0.6rem 0.5rem;
-    }
-    .main-nav a {
-      display: inline-block;
-      color: navy;
-      text-decoration: none;
-      font-size: 1.05rem;
-      font-weight: 700;
-      padding: 0.5rem 0.9rem;
-      border-radius: 999px;
-      outline: none;
-      transition: background .15s, color .15s, transform .08s;
-    }
-    .main-nav a:hover {
-      background: goldenrod;
-      color: navy;
-      transform: translateY(-1px);
-    }
-    .main-nav a:focus-visible {
-      box-shadow: 0 0 0 3px gold, 0 0 0 6px navy;
-    }
-  
-    /* Mark current page */
-    .main-nav a.active,
-    .main-nav a[aria-current="page"] {
-      background: navy;
-      color: white;
-    }
-  </style>
-  
-  <div class="top-header" role="banner">
-    <div class="left-wrap">
-      <img src="Images/pcec-logo.png" alt="Phillips Community Enrichment Center Logo" class="header-logo">
-    </div>
-  
-    <div class="center-wrap">
-      <div class="church-name">Phillips Community Enrichment Center</div>
-    </div>
-  
-    <div class="right-wrap">
-      <!-- Optional quick links / contact info -->
-    </div>
-  </div>
-  
-  <nav class="main-nav" aria-label="Main">
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="programs.html">Programs</a></li>
-      <li><a href="calendar.html">Calendar</a></li>
-      <li><a href="leadership.html">Leadership</a></li>
-      <li><a href="gallery.html">Gallery</a></li>
-      <li><a href="volunteer.html">Volunteer</a></li>
-      <li><a href="egiving.html">E-Giving</a></li>
-      <li><a href="contact.html">Contact Us</a></li>
-    </ul>
-  </nav>
+  /* ===== Header (Navy + Goldenrod) ===== */
+  .top-header {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 1rem;
+    background: navy;
+    padding: 1rem 1.25rem;
+    border-bottom: 4px solid goldenrod;
+  }
+  .header-logo {
+    height: 80px;
+    width: auto;
+    object-fit: contain;
+    transition: transform .15s;
+  }
+  .header-logo:hover {
+    transform: scale(1.05);
+  }
+  .top-header .left-wrap { justify-self: start; }
+  .top-header .right-wrap { justify-self: end; }
+
+  .church-name {
+    color: white;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-align: center;
+    font-size: 2rem;
+    line-height: 1.1;
+  }
+
+  /* ===== Primary Nav ===== */
+  .main-nav {
+    background: floralwhite;
+    border-bottom: 2px solid goldenrod;
+  }
+  .main-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0.6rem 0.5rem;
+  }
+  .main-nav a {
+    display: inline-block;
+    color: navy;
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-weight: 700;
+    padding: 0.5rem 0.9rem;
+    border-radius: 999px;
+    outline: none;
+    transition: background .15s, color .15s, transform .08s;
+  }
+  .main-nav a:hover {
+    background: goldenrod;
+    color: navy;
+    transform: translateY(-1px);
+  }
+  .main-nav a:focus-visible {
+    box-shadow: 0 0 0 3px gold, 0 0 0 6px navy;
+  }
+
+  /* Mark current page */
+  .main-nav a.active,
+  .main-nav a[aria-current="page"] {
+    background: navy;
+    color: white;
+  }
+</style>
+
+<div class="top-header" role="banner">
+<div class="left-wrap">
+  <a href="index.html">
+    <img src="Images/pcec-logo.png" alt="Phillips Community Enrichment Center Logo" class="header-logo">
+  </a>
+</div>
+
+<div class="center-wrap">
+  <div class="church-name">Phillips Community Enrichment Center</div>
+</div>
+
+<div class="right-wrap">
+  <!-- Optional quick links / contact info -->
+</div>
+</div>
+
+<nav class="main-nav" aria-label="Main">
+<ul>
+  <li><a href="index.html">Home</a></li>
+  <li><a href="programs.html">Programs</a></li>
+  <li><a href="calendar.html">Calendar</a></li>
+  <li><a href="leadership.html">Leadership</a></li>
+  <li><a href="gallery.html">Gallery</a></li>
+  <li><a href="volunteer.html">Volunteer</a></li>
+  <li><a href="egiving.html">E-Giving</a></li>
+  <li><a href="contact.html">Contact Us</a></li>
+</ul>
+</nav>
