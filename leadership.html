@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <title>Leadership – Phillips Community Enrichment Center</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" type="image/png" href="images/PCEC.png">
+  <!-- Use capital 'Images' to match your repo casing -->
+  <link rel="icon" type="image/png" href="Images/PCEC.png">
   <link rel="stylesheet" href="StyleSheet/style.css" />
 
   <style>
@@ -24,11 +25,39 @@
     /* ===== Layout ===== */
     .section-wrap { max-width: 1200px; margin: 2.25rem auto; padding: 0 1rem; }
 
+    /* ===== History “wide” feature ===== */
+    .history-feature {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 1.25rem;
+      align-items: start;
+      overflow: hidden;
+      padding: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .history-feature img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 3px solid goldenrod;
+    }
+    .history-feature h3 { color: goldenrod; text-align: center; margin: .25rem 0 .6rem; }
+    .history-feature p { margin: .4rem 0; line-height: 1.65; }
+
+    @media (max-width: 800px) {
+      .history-feature { grid-template-columns: 1fr; }
+      .history-feature img { height: 220px; }
+    }
+
     /* ===== Cards/Grid ===== */
     .leader-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1rem;
+      display: flex;
+      flex-wrap: wrap;        /* wrap to multiple rows */
+      justify-content: center;/* center items on each row */
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
     }
     .leader-card {
       background: floralwhite;
@@ -39,16 +68,20 @@
       display: flex;
       flex-direction: column;
       transition: transform .18s, box-shadow .18s;
+      flex: 0 1 280px;        /* base width ~280px, shrink/grow as needed */
+      max-width: 320px;
     }
     .leader-card:hover {
       transform: translateY(-3px);
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
+    /* Works for <img> or as a gray placeholder <div> */
     .leader-photo {
       width: 100%;
       height: 210px;
       object-fit: cover;
       background: gainsboro;
+      display: block;
     }
     .leader-body {
       padding: 1rem 1rem 1.1rem;
@@ -75,32 +108,6 @@
       text-align: left;
     }
 
-    /* Founder “wide” feature */
-    .founder-feature {
-      display: grid;
-      grid-template-columns: 360px 1fr;
-      gap: 1.25rem;
-      align-items: start;
-      overflow: hidden;
-      padding: 1rem;
-      margin-bottom: 1.25rem;
-    }
-    .founder-feature img {
-      width: 100%;
-      height: 260px;
-      object-fit: cover;
-      border-radius: 10px;
-      border: 3px solid goldenrod;
-    }
-    .founder-feature h3 { color: goldenrod; text-align: center; margin: .25rem 0 .4rem; }
-    .founder-feature p { margin: .35rem 0; }
-
-    @media (max-width: 800px) {
-      .founder-feature { grid-template-columns: 1fr; }
-      .founder-feature img { height: 220px; }
-    }
-
-    /* Small helper */
     .muted { color: gray; font-size: .95rem; text-align: center; }
   </style>
 </head>
@@ -112,139 +119,92 @@
   <!-- Hero -->
   <header class="page-hero">
     <h1>Leadership</h1>
-    <p>Meet our founder and the board members who guide the mission of the Phillips Community Enrichment Center.</p>
+    <p>Meet the Executive Board guiding the mission of the Phillips Community Enrichment Center.</p>
   </header>
 
   <main class="section-wrap">
-    <!-- Founder(s) -->
-    <section aria-labelledby="founders-title" style="margin-bottom:2rem;">
-      <h2 id="founders-title">Founders</h2>
+    <!-- History -->
+    <section aria-labelledby="history-title" style="margin-bottom:2rem;">
+      <h2 id="history-title">History</h2>
 
-      <!-- Phillips CME Church -->
-      <div class="founder-feature">
+      <div class="history-feature">
         <img src="Images/church.jpeg" alt="Phillips CME Church exterior">
         <div>
-          <h3>Phillips CME Church</h3>
+          <h3>Our Story</h3>
           <p>
-            Phillips Christian Methodist Episcopal (CME) Church, organized in 1865, is the second oldest
-            African American congregation in Huntsville and has served as a cornerstone for education,
-            outreach, and community care for generations.
+            The Phillips Community Enrichment Center (PCEC) was birthed from the Phillips Christian Methodist Episcopal Church in Huntsville, AL.
+            The church felt the growth of the outreach programs were expanding and needed to have its own nonprofit organization to meet the needs of the community.
           </p>
           <p>
-            Known for pioneering Vacation Bible Schools, summer enrichment, and model after-school mentoring,
-            the church’s legacy of service continues through Phillips Brotherhood Community Outreach (P.B.C.O.)
-            and collaboration with community partners.
+            The Phillips Community Enrichment Center was legally formed on November 22, 2021 with the adoption of the Bylaws and Articles of Incorporation.
+            The Executive Board was formed and PCEC received its 501c3 letter from the IRS on April 1, 2022.
           </p>
           <p>
-            <strong>Contact:</strong><br>
-            📞 (256) 534-2007<br>
-            📧 <a href="mailto:phillipscmechurch@gmail.com">phillipscmechurch@gmail.com</a><br>
-            🌐 <a href="http://www.phillipscmechurch.org" target="_blank">www.phillipscmechurch.org</a>
+            PCEC sponsors mentoring programs for young boys and men, empowerment and support initiatives for women, after-school tutorials and academic enrichment programs,
+            summer leadership trips for youth, and community resource workshops and family engagement events.
+          </p>
+          <p>
+            PCEC is continuing to expand as it takes to heart its mission to <strong>“Transform Lives One Person at a Time.”</strong>
           </p>
         </div>
       </div>
+    </section>
 
     <div class="section-divider"></div>
 
-    <!-- Board of Directors -->
+    <!-- Executive Board -->
     <section aria-labelledby="board-title">
-      <h2 id="board-title">Board of Directors</h2>
-      <p class="muted" style="margin-bottom:1rem;">(Mock data—replace names/photos/titles as needed.)</p>
+      <h2 id="board-title">Executive Board</h2>
 
       <div class="leader-grid">
-        <!-- Chair -->
+        <!-- President -->
         <article class="leader-card">
-          <img class="leader-photo" src="Images/board/chair.jpg" alt="Board Chair portrait">
+          <!-- Gray placeholder box; swap for <img class="leader-photo" src="Images/board/clifford-march.jpg" alt="Clifford March"> when you have a photo -->
+          <div class="leader-photo" role="img" aria-label="Clifford March"></div>
           <div class="leader-body">
-            <div class="leader-name">Jordan Williams</div>
-            <div class="leader-role">Board Chair</div>
-            <p class="leader-bio">
-              Oversees board governance and strategic direction; community advocate for youth mentorship and education.
-            </p>
-          </div>
-        </article>
-
-        <!-- Vice Chair -->
-        <article class="leader-card">
-          <img class="leader-photo" src="Images/board/vice-chair.jpg" alt="Vice Chair portrait">
-          <div class="leader-body">
-            <div class="leader-name">Taylor Morgan</div>
-            <div class="leader-role">Vice Chair</div>
-            <p class="leader-bio">
-              Supports board leadership and facilitates partnerships to broaden PCEC’s impact.
-            </p>
+            <div class="leader-name">Clifford March</div>
+            <div class="leader-role">President</div>
+            <p class="leader-bio">Provides strategic leadership and board oversight to advance PCEC’s mission.</p>
           </div>
         </article>
 
         <!-- Treasurer -->
         <article class="leader-card">
-          <img class="leader-photo" src="Images/board/treasurer.jpg" alt="Treasurer portrait">
+          <div class="leader-photo" role="img" aria-label="LaKrisha Coleman"></div>
           <div class="leader-body">
-            <div class="leader-name">Avery Chen</div>
+            <div class="leader-name">LaKrisha Coleman</div>
             <div class="leader-role">Treasurer</div>
-            <p class="leader-bio">
-              Provides financial oversight, budgeting, and reporting to sustain program growth.
-            </p>
+            <p class="leader-bio">Oversees financial stewardship, budgeting, and reporting.</p>
           </div>
         </article>
 
         <!-- Secretary -->
         <article class="leader-card">
-          <img class="leader-photo" src="Images/board/secretary.jpg" alt="Secretary portrait">
+          <div class="leader-photo" role="img" aria-label="Shaylayne Wheeler"></div>
           <div class="leader-body">
-            <div class="leader-name">Riley Thompson</div>
+            <div class="leader-name">Shaylayne Wheeler</div>
             <div class="leader-role">Secretary</div>
-            <p class="leader-bio">
-              Maintains board records, coordinates meetings, and strengthens organizational communications.
-            </p>
+            <p class="leader-bio">Maintains board records, coordinates meetings, and documentation.</p>
           </div>
         </article>
 
-        <!-- Member -->
+        <!-- Executive Director -->
         <article class="leader-card">
-          <img class="leader-photo" src="Images/board/member1.jpg" alt="Board Member portrait">
+          <div class="leader-photo" role="img" aria-label="Dr. Linda Patrick"></div>
           <div class="leader-body">
-            <div class="leader-name">Casey Johnson</div>
-            <div class="leader-role">Board Member</div>
-            <p class="leader-bio">
-              Focuses on program evaluation and volunteer engagement.
-            </p>
+            <div class="leader-name">Dr. Linda Patrick</div>
+            <div class="leader-role">Executive Director</div>
+            <p class="leader-bio">Leads day-to-day operations and program execution.</p>
           </div>
         </article>
 
-        <!-- Member -->
+        <!-- Board Member -->
         <article class="leader-card">
-          <img class="leader-photo" src="Images/board/member2.jpg" alt="Board Member portrait">
+          <div class="leader-photo" role="img" aria-label="Kenneth Smoot"></div>
           <div class="leader-body">
-            <div class="leader-name">Peyton Davis</div>
+            <div class="leader-name">Kenneth Smoot</div>
             <div class="leader-role">Board Member</div>
-            <p class="leader-bio">
-              Builds community partnerships and coordinates resource development.
-            </p>
-          </div>
-        </article>
-
-        <!-- Member -->
-        <article class="leader-card">
-          <img class="leader-photo" src="Images/board/member3.jpg" alt="Board Member portrait">
-          <div class="leader-body">
-            <div class="leader-name">Skyler Rivera</div>
-            <div class="leader-role">Board Member</div>
-            <p class="leader-bio">
-              Leads outreach initiatives and parent engagement events.
-            </p>
-          </div>
-        </article>
-
-        <!-- Member -->
-        <article class="leader-card">
-          <img class="leader-photo" src="Images/board/member4.jpg" alt="Board Member portrait">
-          <div class="leader-body">
-            <div class="leader-name">Quinn Patel</div>
-            <div class="leader-role">Board Member</div>
-            <p class="leader-bio">
-              Advises on academic enrichment and STEM programming.
-            </p>
+            <p class="leader-bio">Supports governance and community partnerships.</p>
           </div>
         </article>
       </div>
