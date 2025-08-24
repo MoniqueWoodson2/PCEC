@@ -102,3 +102,34 @@
   <li><a href="contact.html">Contact Us</a></li>
 </ul>
 </nav>
+
+<script>
+  (function () {
+    // Change this to your repo name:
+    const REPO = "PCEC";
+  
+    // If hosted on *.github.io/<REPO>/ use "/REPO/", otherwise "/" (local dev or custom domain)
+    const isProjectPages = location.hostname.endsWith("github.io");
+    const BASE = isProjectPages ? `/${REPO}/` : `/`;
+  
+    // Fix logo link to always go to the real home
+    const logoLink = document.getElementById("logoLink");
+    if (logoLink) logoLink.setAttribute("href", BASE + "index.html");
+  
+    // Fix logo image src (only if it's a relative path)
+    const logoImg = document.querySelector(".header-logo");
+    if (logoImg) {
+      const src = logoImg.getAttribute("src") || "";
+      if (!/^(https?:)?\/\//i.test(src)) {
+        logoImg.setAttribute("src", BASE + src.replace(/^\/+/, ""));
+      }
+    }
+  
+    // Fix all main nav links (skip absolute URLs and hashes)
+    document.querySelectorAll(".main-nav a[href]").forEach(a => {
+      const href = a.getAttribute("href") || "";
+      if (/^(https?:)?\/\//i.test(href) || href.startsWith("#")) return;
+      a.setAttribute("href", BASE + href.replace(/^\/+/, ""));
+    });
+  })();
+  </script>
